@@ -10,6 +10,46 @@
     <a href="{{ url_for('auth.login') }}">Login</a> |
     <a href="{{ url_for('auth.register') }}">Registro</a>
     <hr>
+    <div id="map" style="height: 500px; width: 100%;"></div>
+    <script>
+        function myMap() {
+        var mapProp= {
+          center:new google.maps.LatLng(51.508742,-0.120850),
+          zoom:5,
+        };
+        var map = new google.maps.Map(document.getElementById("map"),mapProp);
+        }
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBv0vB0Rsv4fylS2G6RwDXN9lCdl_9EjfU&callback=myMap"></script>
+
+        <script>
+        function initMap() {
+            // Obtener el elemento del mapa
+            var mapDiv = document.getElementById('map');
+            // Crear el mapa con centro y zoom
+            var map = new google.maps.Map(mapDiv, {
+                center: {lat:-25.3121840,  lng:-57.6028603},
+                zoom: 3
+            });
+        
+        var locations = [
+            { lat: -25.375377, lng:-57.6028603  }, // botiburguer
+            { lat: -25.372701, lng: -57.559500 }, // villa anita
+            { lat: -25.373913, lng: -57.560314 }, // posible casa de marcos
+          ];
+        
+          locations.forEach(function(loc) {
+            new google.maps.Marker({
+              position: loc,
+              map: map
+            });
+          });
+        }
+
+        window.onload = initMap;
+
+</script>
+
     
     <form method="GET" action="{{ url_for('main.search') }}">
         <input type="text" name="q" placeholder="Buscar por profesión" required>
